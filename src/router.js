@@ -1,19 +1,19 @@
 import express from "express";
-import { createUserRouter } from "./router/userRouter";
-export async function createRouter() {
-    const route = express.Router();
-    route.get('/', (req,res) => {
-        res.send("ok");
-    })
-    console.log("-------")
-    console.log(route);
-    //user routes
-    route.post('/users/register', (req, res) => {
-        console.log(req.body)
-        res.send("ok")
-    })
-    route.use('/users', createUserRouter);
+import createUserRouter from "./router/userRouter";
 
-    //return route
-    return route;
-}
+export default function createRouter() {
+    const router = express.Router();
+
+    //users related router setup
+    router.use('/users', createUserRouter());
+
+
+    //router for all routes
+    router.all('*', ( req, res ) => {
+        res.status(404).json({
+            message: "page not found"
+        })
+    })
+    //return router
+    return router;
+};
