@@ -14,16 +14,20 @@ export default class UserModel extends BaseModel {
 
     /**
      * createUser - function to create the user in the users collections
+     * 
      * @param {*} userInfo 
      */
     async createUser(userInfo) {
         try {
-            // todo to find the user is already present or not.
+            const chkUser = await this.model.findOne({ email: userInfo.email });
+            if ( chkUser ) {
+                return "User already Present in the system";
+            }
 
             const user = await this.model.create(userInfo);
             const token = await this.generateAuthToken(user);
 
-            if (!token) {
+            if ( !token ) {
                 throw new Error("Unable to generate Token");
             } 
 
@@ -64,7 +68,6 @@ export default class UserModel extends BaseModel {
      * @param {*} userInfo 
      */
     async findUserByCredentials(userInfo) {
-        console.log("cred:",userInfo);
         const chkUser = await this.model.findOne({ email: userInfo.email });
         if ( !chkUser ) {
             return "User NOt found";
@@ -80,5 +83,40 @@ export default class UserModel extends BaseModel {
             return false;
         }
 
+    }
+
+    /**
+     * updateUser - function to update a user info
+     * @param {*} user 
+     * @param {*} userInfo 
+     */
+    async updateUser(user, userInfo) {
+        try {
+            const updateUserStatus = await this.model.findOneAndUpdate({_id: user._id} , userInfo, { new: true });
+            return updateUserStatus;
+        } catch (err) {
+            console.log("update", err);
+            return null;
+        }
+
+    }
+
+    /**
+     * findUserById - function to find the user by id
+     * 
+     * @param {*} userId 
+     */
+    async findUserById(userId) {
+        try {
+            console.log(userId);
+            const user = await this.model.findById(userId);
+            if (!user) {
+                return "User NOt found";
+            }
+            return user;
+        } catch (err) {
+            console.log(err);
+            return null;
+        }
     }
 }

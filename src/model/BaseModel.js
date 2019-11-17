@@ -7,7 +7,8 @@ const mongoDBUri = getEnvVariable('MONGO_DB_URI');
 
 const options = {
     useNewUrlParser: true,
-    useUnifiedTopology: true
+    useUnifiedTopology: true,
+    useFindAndModify: false
 };
 const mongoConnection = mongoose.connect(mongoDBUri, options);
 
