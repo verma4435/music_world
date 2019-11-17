@@ -1,8 +1,11 @@
 import dotenv from 'dotenv';
 dotenv.config();
 
-//todo make a function that will return the env variable
-// if the env is not found then throw an error
+/**
+ * getEnvVariable - function to get the env variable values
+ * 
+ * @param {*} envVarName 
+ */
 export function getEnvVariable(envVarName) {
     const envValue = process.env[envVarName];
     if(!envValue) {
