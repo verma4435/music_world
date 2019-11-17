@@ -8,7 +8,7 @@ export default function createUserRouter() {
     })
 
     //user register
-    userRouter.post('/register',(req, body) => {
+    userRouter.post('/register',(req, res) => {
         console.log(req.body);
         res.send("ok")
     });
