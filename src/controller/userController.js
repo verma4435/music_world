@@ -7,14 +7,14 @@ let userModel = new UserModel();
  * @param {*} req 
  * @param {*} res 
  */
-export async function login (req, res)  {
+export async function login ( req, res ) {
     try {
         const userInfo = req.body;
         const userLoginStatus = await userModel.findUserByCredentials(userInfo);
         if (!userLoginStatus) {
             return userLoginStatus;
         }
-
+        res.status(200).json(userLoginStatus);
     } catch (err) {
         return err;
     }
@@ -24,7 +24,7 @@ export async function register ( req, res ) {
     try {
         const userCreateStatus =  await userModel.createUser( req.body );
         res.status(201).json(userCreateStatus);
-    } catch(err) {
+    } catch (err) {
         res.status(500).json( { err } );
     }
 }
