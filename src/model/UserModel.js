@@ -10,6 +10,13 @@ export default class UserModel extends BaseModel {
     }
 
     async createUser(userInfo) {
-        await this.model.create(userInfo);
+        try {
+            console.log("userinfo",userInfo);
+            const user = await this.model.create(userInfo);
+            return user;
+        } catch (err) {
+            console.log(err);
+            return err;;
+        }
     }
 }

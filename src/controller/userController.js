@@ -21,7 +21,9 @@ export async function login (req, res)  {
 }
 
 export async function register ( req, res ) {
-console.log(req.body);
-    await userModel.createUser( req.body );
-    res.send("ok");
+console.log("create",req.body);
+    const userCreateStatus =  await userModel.createUser( req.body );
+    console.log(userCreateStatus);
+
+    res.status(201).json(userCreateStatus);
 }

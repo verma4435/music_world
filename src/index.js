@@ -8,6 +8,7 @@ const app = express();
 
 //bodyParser setup
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded( { extended: false } ));
 
 //router setup
 app.use(createRouter());
