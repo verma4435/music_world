@@ -64,3 +64,10 @@ export async function updateProfile ( req, res ) {
         });
     }
 }
+
+/**
+ * 
+ */
+export async function uploadProfilePic( req, res ) {
+    res.send("ok");
+}
