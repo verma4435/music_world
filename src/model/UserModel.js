@@ -3,8 +3,21 @@ import userSchema from "../schema/userSchema";
 import jwt from "jsonwebtoken";
 import { getEnvVariable } from "../utils/envVariable";
 
+/**
+ * @constants
+ */
 const privateKey = getEnvVariable("JWT_SECRET_KEY");
+
+/**
+ * @class UserModel
+ * @classdesc Model class for all user related model functions
+ */
 export default class UserModel extends BaseModel {
+
+    /**
+     * @constructor 
+     * @param {*} connection connection
+     */
     constructor(connection) {
         super('user', connection);
         this.schema = userSchema;
@@ -13,9 +26,10 @@ export default class UserModel extends BaseModel {
     }
 
     /**
-     * createUser - function to create the user in the users collections
-     * 
-     * @param {*} userInfo 
+     * @memberof UserModel
+     * @method createUser function to create a user document
+     * @param {*} userInfo holds the user information
+     * @async 
      */
     async createUser(userInfo) {
         try {
@@ -43,7 +57,7 @@ export default class UserModel extends BaseModel {
 
     /**
      * generateAuthToken - function to genrate and store token for a user
-     * 
+     * @memberof UserModel
      * @param {*} user 
      */
     async generateAuthToken(user) {
@@ -63,9 +77,11 @@ export default class UserModel extends BaseModel {
     }
 
     /**
-     * findUserByCredentials - function to find the user as per the credials
      * 
-     * @param {*} userInfo 
+     * @memberof UserModel
+     * @method findUserByCredentials function to find the user as per the credials
+     * @param {*} userInfo holds the user information
+     * @async
      */
     async findUserByCredentials(userInfo) {
         const chkUser = await this.model.findOne({ email: userInfo.email });
