@@ -1,7 +1,9 @@
 import BaseModel from "./BaseModel";
 import userSchema from "../schema/userSchema";
 import jwt from "jsonwebtoken";
-import { getEnvVariable } from "../utils/envVariable";
+import { 
+    getEnvVariable 
+} from "../utils/envVariable";
 
 /**
  * @constants
@@ -64,7 +66,8 @@ export default class UserModel extends BaseModel {
         try{
             const token = await jwt.sign(
                 { _id: user._id }, 
-                privateKey
+                privateKey,
+                { expiresIn: getEnvVariable("JWT_TOKEN_EXPIRES") }
             );
             user.tokens = user.tokens.concat({ token });
             await user.save();

@@ -18,6 +18,9 @@ export async function auth (req, res, next) {
     
         next();
     } catch (err) {
-        next("Not Auth");
+        res.status(401).json({
+            msg: "token expired"
+        })
+        next("No Auth");
     }
 }
