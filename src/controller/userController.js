@@ -64,10 +64,29 @@ export async function updateProfile ( req, res ) {
         });
     }
 }
-
 /**
- * 
+ * uploadProfilePic
+ * @param {*} req 
+ * @param {*} res 
  */
 export async function uploadProfilePic( req, res ) {
-    res.send("ok");
+    try {
+        // console.log(req.file);
+        const profileStatus = await userModel.updateUserProfile(req.user, req.file);
+        if(!profileStatus) {
+            return res.status(500).json({
+                msg: "profile upload fail"
+            });
+        }
+
+        res.status(200).json({
+            msg: "profile upload successfully"
+        });
+
+    } catch ( err ) {
+        console.log("profile", err);
+        res.status(500).json({
+            msg: "server isssue"
+        })
+    }
 }

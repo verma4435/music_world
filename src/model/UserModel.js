@@ -139,4 +139,28 @@ export default class UserModel extends BaseModel {
             return null;
         }
     }
+
+    /**
+     * @memberof UserModel
+     * @property {Function} updateUserProfile
+     * @param {object} user 
+     * @param {object} fileInfo 
+     */
+    async updateUserProfile(user, fileInfo) {
+        try {
+            const updateStatus = this.model.findOneAndUpdate(
+                { _id: user._id },
+                { profilePic: fileInfo.path },
+                { new: true }
+            );
+            // console.log("-----",updateStatus);
+            if( !updateStatus ) {
+                return null;
+            }
+            return updateStatus;
+        } catch ( err ) {
+            console.log(err);
+            return null;
+        }
+    }
 }
