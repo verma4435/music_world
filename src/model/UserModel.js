@@ -52,7 +52,7 @@ export default class UserModel extends BaseModel {
                 token
             };
         } catch (err) {
-            console.log(err);
+            console.log( "create user", err );
             return null;
         }
     }
@@ -127,14 +127,14 @@ export default class UserModel extends BaseModel {
      */
     async findUserById(userId) {
         try {
-            console.log(userId);
+            // console.log(userId);
             const user = await this.model.findById(userId);
             if (!user) {
                 return "User NOt found";
             }
             return user;
         } catch (err) {
-            console.log(err);
+            console.log( "user by id", err );
             return null;
         }
     }

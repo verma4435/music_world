@@ -46,7 +46,7 @@ export async function updateProfile ( req, res ) {
         const user =  req.user;
         const userUpdateInfo = req.body; 
         const userUpdateStatus = await userModel.updateUser(user, userUpdateInfo);
-        console.log(userUpdateStatus);
+        // console.log(userUpdateStatus);
         if (!userUpdateStatus)  {
             res.status(404).json({
                 msg: "Data not updated"
@@ -57,8 +57,8 @@ export async function updateProfile ( req, res ) {
             user: userUpdateStatus
         });
     } catch (err) {
-        console.log("------")
-        console.log(err);
+        // console.log("------")
+        // console.log(err);
         res.status(500).json({
             err
         });
