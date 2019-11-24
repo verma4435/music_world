@@ -64,10 +64,11 @@ export default class UserModel extends BaseModel {
      */
     async generateAuthToken(user) {
         try{
+            const tokenExpTime = parseInt( getEnvVariable("JWT_TOKEN_EXPIRES") ); 
             const token = await jwt.sign(
                 { _id: user._id }, 
                 privateKey,
-                { expiresIn: getEnvVariable("JWT_TOKEN_EXPIRES") }
+                { expiresIn:  tokenExpTime }
             );
             user.tokens = user.tokens.concat({ token });
             await user.save();
@@ -130,7 +131,7 @@ export default class UserModel extends BaseModel {
             // console.log(userId);
             const user = await this.model.findById(userId);
             if (!user) {
-                return "User NOt found";
+                return "User Not found";
             }
             return user;
         } catch (err) {
