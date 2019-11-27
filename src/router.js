@@ -1,5 +1,6 @@
 import express from "express";
 import createUserRouter from "./router/userRouter";
+import createMusicRouter from "./router/musicRouter";
 
 export default function createRouter() {
     const router = express.Router();
@@ -7,6 +8,8 @@ export default function createRouter() {
     //users related router setup
     router.use('/users', createUserRouter());
 
+    //music related router setup
+    router.use("/music", createMusicRouter());
 
     //router for all routes
     router.all('*', ( req, res ) => {
