@@ -1,7 +1,10 @@
 import express from 'express';
 import  * as userController  from "../controller/userController";
 import { auth } from "../utils/auth";
-import uploadPhoto from '../utils/uploadPhotos';
+import { 
+    uploadPhoto,
+    uploadMusic
+} from '../utils/upload';
 
 /**
  * createUserRouter - function to use to create route for the users related actions
