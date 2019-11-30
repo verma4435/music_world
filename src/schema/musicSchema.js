@@ -6,7 +6,10 @@ const musicSchema = new Mongoose.Schema({
         type: String,
         default: null
     },
-    
+    playlist: {
+        type: String,   // to be of ref type
+        default: null
+    },
     likes: {
         type: Number,
         default: 0
